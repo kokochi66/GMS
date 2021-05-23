@@ -4,24 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/fonts.css">
-  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="stylesheet" href="./css/reset.css">
 
   <title>GMS</title>
 </head>
 <body>
   <div id="wrap">
-    <div id="header">
-      <div id="logo">GMS</div>
-      <div id="menu">
-        <div class="menuIcon">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-      </div>
-    </div>
+    <%-include('./header') %>
     <!-- //헤더 -->
     <div id="contents">
       <div id="cont_title">
@@ -43,15 +34,10 @@
     </div>
     <!-- //컨텐츠 -->
   </div>
-  <div id="footer">FOOTER</div>
+  <%-include('./footer') %>
   <!-- //푸터 -->
 
-  <div id="menu_side" class="">
-    <div class="side-bg"></div>
-    <div class="side-block">
-      <div class="cont">menu1</div>
-    </div>
-  </div>
+  <%-include('./menu_side') %>
   <!-- //사이드 메뉴 바 구현 -->
   <script src="../js/main.js">
 
