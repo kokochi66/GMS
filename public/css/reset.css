@@ -10,6 +10,84 @@
 * {font-family: 'vitpride_ttf'; }
 body {background-color: var(--bg-color);}
 
+#wrap {
+  width: 1200px; margin: 0 auto;
+}
+
+#header {
+  width: 100%; height: 80px; position: relative;
+}
+#header > div, #header > a {
+  position: absolute; cursor: pointer; top: 50%; transform: translateY(-50%);
+}
+
+#logo {
+  font-size: 30px; font-family: 'vit_ttf'; left: 30px; display: inline-block;
+}
+#logo:hover {color: #000;}
+/* // 헤더 - 로고 */
+#menu {
+  width: 30px; height: 25px; right: 30px;
+}
+#menu .menuIcon {
+  display: flex; flex-direction: column; justify-content: space-between;
+  width: 100%; height: 100%;
+}
+#menu .menuIcon .bar {
+  width: 100%; height: 5px; background-color: #000; border-radius: 3px;
+  transition: background-color .2s;
+}
+#menu .menuIcon:hover .bar {background-color: var(--point-color);}
+#menu_side {
+  position: fixed; top: 0; left: 0;
+}
+#menu_side .side-bg {
+  position: fixed; width: 100%; height: 100%;
+  background-color: rgba(60, 60, 60, 0.45); overflow: hidden;
+  top: 0; left: 0; z-index: 10; opacity: 0;
+  transition: opacity .5s; pointer-events: none;
+}
+#menu_side.active .side-bg {opacity: 1; pointer-events: auto;}
+#menu_side .side-block {
+  position: fixed; width: 300px; height: 100%;
+  background-color: #1f1f1f; top: 0; left: -300px; z-index: 20;
+  transition: left .5s;
+}
+#menu_side.active .side-block {
+  left: 0;
+}
+#menu_side .side-block .user_info {
+  width: 80%; height: 200px; background-color: rgb(104, 104, 104); margin: 30px auto;
+  color: #fff; font-size: 30px; line-height: 200px; text-align: center;
+}
+#menu_side .side-block .cont {
+  color: #fff; text-align: center; font-weight: bold; display: block;
+  cursor: pointer; font-size: 20px; margin-bottom: 10px; padding: 10px 0;
+  transition: background-color .15s;
+}
+#menu_side .side-block .cont:hover {
+  background-color: rgb(56, 56, 56);
+}
+
+
+/* // 헤더 - 메뉴 */
+/* // 헤더부분 */
+
+
+#footer {
+  width: 100%; height: 200px; background-color: rgba(45, 45, 45, 1);
+  color: #fff;
+}
+/* // 푸터 부분 */
+
+@media (max-width: 1280px){
+  #wrap {width: 100%;}
+}
+@media (max-width: 800px) {}
+@media (max-width: 400px) {}
+
+
+
 /* 여백 초기화 */
 body, div, ul, li, dl, dt, ol, h1, h2, h3, h4, h5, h6, input, fieldset, legend, p, select, table, th, td, tr, textarea, button, form, figure {margin: 0; padding: 0;}
 

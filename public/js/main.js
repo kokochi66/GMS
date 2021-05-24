@@ -1,5 +1,4 @@
 
-
 const body = document.querySelector('body'),
       menu_menuIcon = document.querySelector('#menu'),
       menu_menuSide = document.querySelector('#menu_side'),

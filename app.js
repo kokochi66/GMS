@@ -3,6 +3,7 @@ const app = express()
 const path = require('path')
 const createError = require('http-errors')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const logger = require('morgan')
 
 app.set('views', path.join(__dirname, 'views'))

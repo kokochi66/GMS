@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router()
 
 const loginRouter = require('./user/login_index')
+const logoutRouter = require('./user/logout_index')
 const registRouter = require('./user/register_index')
 router.use('/login', loginRouter)
+router.use('/logout', logoutRouter)
 router.use('/register', registRouter)
 // user 인덱싱
 
 
 router.get('/', (req,res) => {
-    res.status(200).render('./ejs/index.ejs')
+    res.status(200).render('./ejs/main/index.ejs', {'user':req.cookies.user})
 })
 
 module.exports = router
