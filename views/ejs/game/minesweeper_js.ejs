@@ -51,6 +51,11 @@
             }
             // 지뢰찾기 맵 전체 배치를 arr에 적용한다
 
+            let maxZero_set = maxZero()
+            console.log(maxZero_set)
+            game_pannel[col * maxZero_set[0] + maxZero_set[1]].classList.add('first')
+            
+
             game_pannel.forEach(elem => {
                 elem.addEventListener('mousedown', panneldown)
                 elem.addEventListener('mouseleave', pannelup)
@@ -67,6 +72,7 @@
         }
         const pannelClick = (e) => {
             if(e.target.classList.contains('flag')) return;
+            if(e.target.classList.contains(''))
             let c = find_nodeIndex(e.target.parentElement)
             let r = find_nodeIndex(e.target)
             if(arr[c][r] === 0) find_BFS(c,r)
@@ -79,7 +85,6 @@
             e.target.removeEventListener('click', pannelClick)
             if(arr[c][r] === -1) { // 패배
                 console.log('패배하였습니다.')
-                console.log(arr[0].length, arr.length)
                 game_set(c,r)
                 clearInterval(timer)
             } else if(win_Count === 0) { // 승리
@@ -207,6 +212,41 @@
             timeset[1] = timeset[1] + 1 >= 60 ? 0 : timeset[1] + 1;
             game_play_time.innerHTML = `${timeset[0] < 10 ? '0'+timeset[0] : timeset[0]} : ${timeset[1] < 10 ? '0'+timeset[1] : timeset[1]}`;
         }
+        function maxZero() {
+            let curx = 0, cury = 0, maxValue = 0;
+            let checkTrue = [];
+            for(let i=0;i<arr.length;i++) {
+                checkTrue[i] = [];
+                for(let j=0;j<arr[0].length;j++) {
+                    checkTrue[i][j] = false;
+                }
+            }
+            for(let i=0;i<arr.length;i++) {
+                for(let j=0;j<arr[0].length;j++) {
+                    if(arr[i][j] === 0 && checkTrue[i][j] === false) {
+                        let cBFS_res = maxZero_BFS(i,j,checkTrue)
+                        if(maxValue < cBFS_res) {
+                            maxValue = cBFS_res;
+                            curx = j;
+                            cury = i;
+                        }
+                    } else if(checkTrue[i][j] === false) checkTrue[i][j] = true;
+                }
+            }
+            return [cury, curx]
+        }
+        function maxZero_BFS(h, w, checkTrue) {
+            if(h < 0 || h >= arr.length || w < 0 || w >= arr[0].length
+                || checkTrue[h][w] === true || arr[h][w] != 0) return 0;
+            checkTrue[h][w] = true;
+            let sumValue = 1;
+            sumValue += maxZero_BFS(h+1, w, checkTrue)
+            sumValue += maxZero_BFS(h-1, w, checkTrue)
+            sumValue += maxZero_BFS(h, w+1, checkTrue)
+            sumValue += maxZero_BFS(h, w-1, checkTrue)
+            return sumValue;
+        }
+
         game_diff_btn.forEach(elem => {elem.addEventListener('click', gameStartEvent)})
     }
     func()

@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
+const fs = require('fs')
 
+const connKey = JSON.parse(fs.readFileSync('./key/sql.json'))
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    port     : 3307,
-    user     : 'root',
-    password : 'rmeka5959!',
-    database : 'gms'
+    host     : connKey.host,
+    port     : connKey.port,
+    user     : connKey.user,
+    password : connKey.password,
+    database : connKey.database
 });
 
 router.get('/', (req,res) => {
