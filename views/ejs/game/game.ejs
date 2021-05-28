@@ -2,12 +2,26 @@
 <body>
   <div id="wrap">
     <%-include('../header') %>
-    <%-include(`./${game}`) %>
+    <link rel="stylesheet" href="/css/game/<%= game%>.css">
+    <!-- 지뢰찾기 css -->
+    <div id="contents">
+        <div class="game_ranking"></div>
+        <div class="game_box">
+            <div class="game_play_box">
+            </div>
+            <%-include(`./${game}`) %>
+        </div>
+        <div class="game_mypage"></div>
+    </div>
+    <!-- 지뢰찾기 html -->
+    <script src='/js/game/<%= game%>.js'></script>
+    <!-- 지뢰찾기 스크립트 -->
+
+    
     <!-- //컨텐츠 -->
   </div>
   <%-include('../menu_side') %>
   <!-- //사이드 메뉴 바 구현 -->
-  <script src="../js/main.js"></script>
-  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

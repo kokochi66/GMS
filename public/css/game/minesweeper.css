@@ -1,0 +1,45 @@
+#contents {background-color: rgb(149, 207, 144); height: 800px;}
+#contents > div {height: 100%; display: block; float: left;}
+.game_ranking {width: 20%; background-color: rgba(235, 195, 195, 0.842);}
+
+.game_box {width: 60%;  background-color: rgba(195, 235, 215, 0.842);}
+.game_box .game_play_box {
+    width: 680px; height: 680px; background-color: rgba(155, 192, 218, 0.842);
+    margin: 20px auto; box-sizing: border-box; border: 5px solid #000;
+    border-radius: 5px; display: flex; justify-content: space-around; flex-direction: column;
+}
+.game_box .game_play_box .row_set {
+    width: 100%; display: flex; justify-content: space-around; box-sizing: border-box; 
+}
+.game_box .game_play_box .row_set .pannel {
+    height: 100%; border: 1px solid #000; background-size: 900%;
+    border-radius: 3px; background-image: url('/img/game/minesweeper/sprites.png'); background-repeat: no-repeat;
+}
+.game_box .game_play_box .row_set .pannel.first {filter: drop-shadow(16px 16px 20px red) invert(75%);}
+.game_box .game_play_box.easy .row_set {height: 8%;}
+.game_box .game_play_box.easy .row_set .pannel {width: 8%; background-position: 0px -178.718px;}
+
+.game_box .game_play_box.normal .row_set {height: 4.5%;}
+.game_box .game_play_box.normal .row_set .pannel {width: 4.5%; background-position: 0px -100px;}
+
+.game_box .game_play_box.hard .row_set {height: 3.5%;}
+.game_box .game_play_box.hard .row_set .pannel {width: 3.2%; background-position: 0px -70.3px;}
+.game_box .game_info_box {
+    width: 680px; height: 60px; background-color: rgba(161, 161, 161, 0.842);
+    margin: 20px auto;
+}
+.game_box .game_info_box > button {
+    cursor: pointer; font-size: 20px; font-weight: bold; margin-left: 10px; padding: 5px;
+    border: 1px solid #000; border-radius: 10px; background-color: rgb(255, 255, 255); display: block; float: left;
+}
+.game_box .game_info_box > button:hover {background-color: rgb(167, 167, 167);}
+.game_box .game_info_box .info {
+    display: inline-block; width: 300px; margin-left: 20px;
+}
+.game_box .game_info_box .info > div {
+    float: left; margin-left: 20px; font-size: 25px; padding: 0 5px; border: 1px solid #000;
+    border-radius: 10px; background-color: #fff; font-weight: bold;
+}
+
+
+.game_mypage {width: 20%; background-color: rgba(219, 195, 235, 0.842); }
