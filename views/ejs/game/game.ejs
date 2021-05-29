@@ -1,27 +1,83 @@
 <%-include('../template_head') %>
+<link rel="stylesheet" href="/css/game/game.css">
+<link rel="stylesheet" href="/css/game/<%= game%>.css">
 <body>
   <div id="wrap">
     <%-include('../header') %>
-    <link rel="stylesheet" href="/css/game/<%= game%>.css">
-    <!-- 지뢰찾기 css -->
+    
     <div id="contents">
-        <div class="game_ranking"></div>
+        <div class="game_ranking">
+          <h4>랭킹</h4>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_number">
+            <div class="text">1</div>
+            <div class="name">kokochi</div>
+            <div class="cont">00:00</div>
+          </div>
+          <div class="rank_more">
+            <div class="text">더보기</div>
+          </div>
+        </div>
         <div class="game_box">
-            <div class="game_play_box">
-            </div>
+            <div class="game_play_box"></div>
             <%-include(`./${game}`) %>
         </div>
-        <div class="game_mypage"></div>
+        <div class="game_mypage">
+          <div class="my_template">
+            <% let img = user ? user.userImg === null ? 'NONE' : user.userImg : 'NONE'; %>
+            <div class="myimg" style="background-image: '<%= img === 'NONE' ? '' : img%>';">
+              <%= img %>
+            </div>
+            <div class="myNickname"><%= user ? user.userNickname : 'NONE' %></div>
+          </div>
+          
+          <%-include(`./${game}_record`) %>
+        </div>
     </div>
-    <!-- 지뢰찾기 html -->
-    <script src='/js/game/<%= game%>.js'></script>
-    <!-- 지뢰찾기 스크립트 -->
-
-    
     <!-- //컨텐츠 -->
   </div>
   <%-include('../menu_side') %>
   <!-- //사이드 메뉴 바 구현 -->
   <script src="/js/main.js"></script>
+  <script src='/js/game/<%= game%>.js'></script>
 </body>
 </html>

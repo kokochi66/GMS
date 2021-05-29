@@ -2,21 +2,22 @@ let func = function() {
     const game_box = document.querySelector('.game_box'),
         game_play_box = document.querySelector('.game_box .game_play_box'),
         game_info_box = document.querySelector('.game_box .game_info_box'),
-        game_diff_btn = document.querySelectorAll('.game_box .game_info_box > button'),
-        game_mine_count = document.querySelector('.game_box .game_info_box .info .mine_count'),
-        game_play_time = document.querySelector('.game_box .game_info_box .info .play_time');
-
+        game_diff_btn = document.querySelectorAll('.game_box .game_info_box .game_level > button'),
+        game_mine_count = document.querySelector('.game_box .game_info_box .game_info .mine_count .cont'),
+        game_play_time = document.querySelector('.game_box .game_info_box .game_info .play_time .cont');
+    let Eindex = 0;
     let game_pannel;
     let win_Count = 0;
     let bgpRootY, bgpRootX, bgpRound;
     let arr = [];
-    let timer;
+    let timer, timeset = [];
     const gameStartEvent = (e) => {
-        let EIndex = find_nodeIndex(e.target), col = EIndex === 0 ? 10 : EIndex === 1 ? 18 : 25;
+        EIndex = find_nodeIndex(e.target)
+        let col = EIndex === 0 ? 10 : EIndex === 1 ? 18 : 25;
         let row = col;
         let diff = EIndex === 0 ? 'easy' : EIndex === 1 ? 'normal' : 'hard';
         let mine = EIndex === 0 ? 20 : EIndex === 1 ? 60 : 120;
-        let timeset = [0,0]
+        timeset = [0,0]
         game_play_time.innerHTML = '00 : 00'
         clearInterval(timer)
         timer = setInterval(() => {
@@ -52,7 +53,6 @@ let func = function() {
         // 지뢰찾기 맵 전체 배치를 arr에 적용한다
 
         let maxZero_set = maxZero()
-        console.log(maxZero_set)
         game_pannel[col * maxZero_set[0] + maxZero_set[1]].classList.add('first')
         
 
@@ -93,6 +93,7 @@ let func = function() {
             console.log("승리하였습니다.")
             game_set(-1, -1)
             clearInterval(timer)
+            addGameRecord(timeset, Eindex)
         }
     }
     const pannelCheck = (e) => {
@@ -248,7 +249,25 @@ let func = function() {
         sumValue += maxZero_BFS(h, w-1, checkTrue)
         return sumValue;
     }
-
+    function addGameRecord(TimeSet, level) {
+        let record = `00:${TimeSet[0] < 10 ? '0'+TimeSet[0] : TimeSet[0]}:${TimeSet[1] < 10 ? '0'+TimeSet[1] : TimeSet[1]}`
+        //Ajax POST Method TEST
+        $.ajax({
+            url: '/game/minesweeper/record',
+            dataType: 'json',
+            type: 'POST',
+            data: {rec:record, level:level},
+            success: (result) => {
+                if (result) {
+                    if(result.res === 'success') alert('기록되었습니다.')
+                    else alert('기록에 실패하였습니다.')
+                } 
+            },
+            error: (xhr, status) => {
+                alert(xhr +" : "+status)
+            }
+        });
+    }
 
 
     game_diff_btn.forEach(elem => {elem.addEventListener('click', gameStartEvent)})
