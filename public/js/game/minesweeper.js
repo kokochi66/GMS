@@ -4,8 +4,11 @@ let func = function() {
         game_info_box = document.querySelector('.game_box .game_info_box'),
         game_diff_btn = document.querySelectorAll('.game_box .game_info_box .game_level > button'),
         game_mine_count = document.querySelector('.game_box .game_info_box .game_info .mine_count .cont'),
-        game_play_time = document.querySelector('.game_box .game_info_box .game_info .play_time .cont');
-    let Eindex = 0;
+        game_play_time = document.querySelector('.game_box .game_info_box .game_info .play_time .cont'),
+        game_record_box = document.querySelectorAll('.game_mypage .my_record .record_box > .cont'),
+        game_ranking = document.querySelector('.game_ranking .game_ranking_numberbox');
+    myRecord_setting(game_record_box)
+    let EIndex;
     let game_pannel;
     let win_Count = 0;
     let bgpRootY, bgpRootX, bgpRound;
@@ -13,6 +16,7 @@ let func = function() {
     let timer, timeset = [];
     const gameStartEvent = (e) => {
         EIndex = find_nodeIndex(e.target)
+        rankRecord_setting(game_ranking, EIndex)
         let col = EIndex === 0 ? 10 : EIndex === 1 ? 18 : 25;
         let row = col;
         let diff = EIndex === 0 ? 'easy' : EIndex === 1 ? 'normal' : 'hard';
@@ -36,7 +40,7 @@ let func = function() {
         } // 배열 초기화
         game_play_box.classList.remove('easy', 'normal', 'hard')
         game_play_box.classList.add(diff)
-        boxclear()
+        boxclear(game_play_box)
         boxSetting(col,col)
         game_pannel = document.querySelectorAll('.row_set .pannel')
 
@@ -90,10 +94,11 @@ let func = function() {
             game_set(c,r)
             clearInterval(timer)
         } else if(win_Count === 0) { // 승리
-            console.log("승리하였습니다.")
+            console.log("승리하였습니다. ", EIndex)
             game_set(-1, -1)
             clearInterval(timer)
-            addGameRecord(timeset, Eindex)
+            addGameRecord(timeset, EIndex)
+            rankRecord_setting(game_ranking , EIndex)
         }
     }
     const pannelCheck = (e) => {
@@ -110,11 +115,6 @@ let func = function() {
             game_mine_count.innerHTML = Number(game_mine_count.innerHTML) - 1
             e.target.classList.add('flag')
             pannel_bgp_setting(e.target, 2)
-        }
-    }
-    function boxclear() {  
-        while(game_play_box.hasChildNodes()) {
-            game_play_box.removeChild( game_play_box.firstChild )
         }
     }
     function boxSetting(col, row) {
@@ -259,8 +259,9 @@ let func = function() {
             data: {rec:record, level:level},
             success: (result) => {
                 if (result) {
-                    if(result.res === 'success') alert('기록되었습니다.')
-                    else alert('기록에 실패하였습니다.')
+                    if(result.res === 'success') {
+                        myRecord_setting_Single(level,game_record_box, result.record);
+                    }
                 } 
             },
             error: (xhr, status) => {
@@ -268,7 +269,6 @@ let func = function() {
             }
         });
     }
-
 
     game_diff_btn.forEach(elem => {elem.addEventListener('click', gameStartEvent)})
 }

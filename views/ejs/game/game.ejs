@@ -8,51 +8,7 @@
     <div id="contents">
         <div class="game_ranking">
           <h4>랭킹</h4>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
-          <div class="rank_number">
-            <div class="text">1</div>
-            <div class="name">kokochi</div>
-            <div class="cont">00:00</div>
-          </div>
+          <div class="game_ranking_numberbox"></div>
           <div class="rank_more">
             <div class="text">더보기</div>
           </div>
@@ -77,7 +33,12 @@
   </div>
   <%-include('../menu_side') %>
   <!-- //사이드 메뉴 바 구현 -->
+  <script>
+    
+    let myRecord = JSON.parse(`<%= myRecord ? JSON.stringify(myRecord) : null%>`.replaceAll('&#34;', '\"'));
+  </script>
   <script src="/js/main.js"></script>
+  <script src="/js/game/game.js"></script>
   <script src='/js/game/<%= game%>.js'></script>
 </body>
 </html>

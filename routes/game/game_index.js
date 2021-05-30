@@ -13,10 +13,35 @@ const connection = mysql.createConnection({
 });
 
 router.get('/:id', (req,res) => {
-    res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user})
+    if(!req.cookies.user) {
+        res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user, 'myRecord' : {}})
+        return;
+    }   // 로그인되어있지 않으면 기록을 불러오지 않음
+
+    let playUser = req.cookies.user.userId
+    let playGame = req.params.id
+    connection.query(`SELECT gameRecordValue FROM game WHERE gameName = '${playGame}'`, (err, rows, fields) => {
+        // 게임의 레코드값을 먼저 가져와서 지정함
+        if(err) throw err;
+        if(rows.length > 0) {
+            let playGameRecordValue = rows[0]['gameRecordValue']
+            connection.query(`select r.recordId, r.recordUserId, r.recordGameName, r.recordGameLevel, t.recordCont from game_record AS r, 
+            game_record_${playGameRecordValue} AS t where r.recordId = t.recordId AND r.recordUserId = '${playUser}' ORDER BY r.recordGameLevel ASC;`, (err, rows2, fields) => {
+                if(err) throw err;
+                res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user, 'myRecord': rows2})
+            })
+        } else {
+            console.log('게임을 찾지못함')
+            res.send({res:'fault'}) // 게임을 찾을 수 없으면 기록실패
+        }
+    })
 })
 
 router.post('/:id/record', (req,res) => {
+    if(!req.cookies.user) {
+        res.send({res:'fault'})
+        return;
+    }   // 로그인되어있지 않으면 기록되지 않음
     let playUser = req.cookies.user.userId
     let playGame = req.params.id
     let gameLevel = req.body.level
@@ -41,7 +66,7 @@ router.post('/:id/record', (req,res) => {
                     where recordId = '${rows2[0]['recordId']}'`, (err, rows3, fields) => {
                         if(err) throw err;
                         console.log('지정값 변경 완료')
-                        res.status(200).send({res:'success'});
+                        res.status(200).send({res:'success', record:gameRecord});
                     })
 
                 } else {
@@ -50,17 +75,37 @@ router.post('/:id/record', (req,res) => {
                     connection.query(`insert into game_record(recorduserId, recordGameName, recordGameLevel, recordvalue) 
                     value('${playUser}','${playGame}',${gameLevel},'${playGameRecordValue}');`, (err, rows3, fields) => {
                         // 게임테이블 추가
-                        connection.query(`insert into game_record_${playGameRecordValue} value( (select recordId from game_record where recorduserId = '${playUser}' AND recordGameName = '${playGame}' AND recordGameLevel = ${gameLevel}) ,'${gameRecord}');`, (err, rows3, fields) => {
+                        connection.query(`insert into game_record_${playGameRecordValue} value( (select recordId from game_record where recorduserId = '${playUser}' 
+                        AND recordGameName = '${playGame}' AND recordGameLevel = ${gameLevel}) ,'${gameRecord}');`, (err, rows3, fields) => {
                             // 기록테이블 추가
                             if(err) throw err;
                             console.log('추가 완료')
-                            res.status(200).send({res:'success'});
+                            res.status(200).send({res:'success', record:gameRecord});
                         })
                     })
                 }
             })
 
 
+        } else {
+            console.log('게임을 찾지못함')
+            res.send({res:'fault'}) // 게임을 찾을 수 없으면 기록실패
+        }
+    })
+})
+
+router.get('/:id/record', (req,res) => {
+    let gameLevel = req.query.level
+    let playGame = req.params.id
+    connection.query(`SELECT gameRecordValue FROM game WHERE gameName = '${playGame}'`, (err, rows, fields) => {
+        // 게임의 레코드값을 먼저 가져와서 지정함
+        if(err) throw err;
+        if(rows.length > 0) {
+            let playGameRecordValue = rows[0]['gameRecordValue']
+            connection.query(`select r.recordId, r.recordUserId, r.recordGameName, r.recordGameLevel, t.recordCont from game_record AS r, 
+            game_record_${playGameRecordValue} AS t where r.recordId = t.recordId AND r.recordGameLevel=${gameLevel} AND r.recordGameName='${playGame}' ORDER BY t.recordCont ASC;`, (err, rows2, fields) => {
+                res.status(200).send(rows2)
+            })
         } else {
             console.log('게임을 찾지못함')
             res.send({res:'fault'}) // 게임을 찾을 수 없으면 기록실패
