@@ -99,10 +99,12 @@ let func = function() {
             clearInterval(timer)
             addGameRecord(timeset, EIndex)
             rankRecord_setting(game_ranking , EIndex)
+            myRecord_setting(game_record_box)
         }
     }
     const pannelCheck = (e) => {
         e.preventDefault()
+        if(e.target.classList.contains('first')) return;
         if(e.target.classList.contains('flag')) {
             e.target.classList.remove('flag')
             game_mine_count.innerHTML = Number(game_mine_count.innerHTML) + 1
@@ -193,10 +195,13 @@ let func = function() {
     function game_set(h, w) {
         for(let i=0;i<arr.length;i++) {
             for(let j=0;j<arr[0].length;j++) {
+                let target_pan = game_pannel[(i*arr[0].length) + j];
             if(!(i == h && j == w) && arr[i][j] == -1) {
-                pannel_bgp_setting(game_pannel[(i*arr[0].length) + j], 7)
+                pannel_bgp_setting(target_pan, 5)
+            } else if(target_pan.classList.contains('flag')) {
+                pannel_bgp_setting(target_pan, 7)
             }
-            removeEvent(game_pannel[(i*arr[0].length) + j])
+            removeEvent(target_pan)
             }
         }
         GameStart = false;
@@ -253,15 +258,12 @@ let func = function() {
         let record = `00:${TimeSet[0] < 10 ? '0'+TimeSet[0] : TimeSet[0]}:${TimeSet[1] < 10 ? '0'+TimeSet[1] : TimeSet[1]}`
         //Ajax POST Method TEST
         $.ajax({
-            url: '/game/minesweeper/record',
+            url: `/game/${gameName}/record`,
             dataType: 'json',
             type: 'POST',
             data: {rec:record, level:level},
             success: (result) => {
                 if (result) {
-                    if(result.res === 'success') {
-                        myRecord_setting_Single(level,game_record_box, result.record);
-                    }
                 } 
             },
             error: (xhr, status) => {

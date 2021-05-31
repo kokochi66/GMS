@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
 const fs = require('fs')
+const request = require('request')
 
 const connKey = JSON.parse(fs.readFileSync('./key/sql.json'))
 const connection = mysql.createConnection({
@@ -18,23 +19,7 @@ router.get('/:id', (req,res) => {
         return;
     }   // 로그인되어있지 않으면 기록을 불러오지 않음
 
-    let playUser = req.cookies.user.userId
-    let playGame = req.params.id
-    connection.query(`SELECT gameRecordValue FROM game WHERE gameName = '${playGame}'`, (err, rows, fields) => {
-        // 게임의 레코드값을 먼저 가져와서 지정함
-        if(err) throw err;
-        if(rows.length > 0) {
-            let playGameRecordValue = rows[0]['gameRecordValue']
-            connection.query(`select r.recordId, r.recordUserId, r.recordGameName, r.recordGameLevel, t.recordCont from game_record AS r, 
-            game_record_${playGameRecordValue} AS t where r.recordId = t.recordId AND r.recordUserId = '${playUser}' ORDER BY r.recordGameLevel ASC;`, (err, rows2, fields) => {
-                if(err) throw err;
-                res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user, 'myRecord': rows2})
-            })
-        } else {
-            console.log('게임을 찾지못함')
-            res.send({res:'fault'}) // 게임을 찾을 수 없으면 기록실패
-        }
-    })
+    res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user})
 })
 
 router.post('/:id/record', (req,res) => {
@@ -97,6 +82,7 @@ router.post('/:id/record', (req,res) => {
 router.get('/:id/record', (req,res) => {
     let gameLevel = req.query.level
     let playGame = req.params.id
+
     connection.query(`SELECT gameRecordValue FROM game WHERE gameName = '${playGame}'`, (err, rows, fields) => {
         // 게임의 레코드값을 먼저 가져와서 지정함
         if(err) throw err;
@@ -112,5 +98,26 @@ router.get('/:id/record', (req,res) => {
         }
     })
 })
+
+router.get('/:id/myrecord', (req,res) => {
+    let playUser = req.query.Userid 
+    let playGame = req.params.id
+
+    connection.query(`SELECT gameRecordValue FROM game WHERE gameName = '${playGame}'`, (err, rows, fields) => {
+        // 게임의 레코드값을 먼저 가져와서 지정함
+        if(err) throw err;
+        if(rows.length > 0) {
+            let playGameRecordValue = rows[0]['gameRecordValue']
+            connection.query(`select r.recordId, r.recordUserId, r.recordGameName, r.recordGameLevel, t.recordCont from game_record AS r, 
+            game_record_${playGameRecordValue} AS t where r.recordId = t.recordId AND r.recordUserId='${playUser}' AND r.recordGameName='${playGame}' ORDER BY r.recordGameLevel ASC;`, (err, rows2, fields) => {
+                res.status(200).send(rows2)
+            })
+        } else {
+            console.log('게임을 찾지못함')
+            res.send({res:'fault'}) // 게임을 찾을 수 없으면 기록실패
+        }
+    })
+})
+
 
 module.exports = router

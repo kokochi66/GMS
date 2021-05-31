@@ -4,19 +4,30 @@ function boxclear(box) {
     }
 }
 function myRecord_setting(box) {
-    let i=0, j=0;
-    while(i < myRecord.length && j < box.length) {
-        if(myRecord[i]['recordGameLevel'] === j) {
-            box[j].innerHTML = myRecord[i]['recordCont'].slice(3)
-            i++;
-            j++;
-        } else if(myRecord[i]['recordGameLevel'] > j) {
-            box[j].innerHTML = '없음'
-            j++;
-        } else if(myRecord[i]['recordGameLevel'] < j) {
-            i++;
+    $.ajax({
+        url: `/game/${gameName}/myrecord?Userid=${userId}`,
+        type: 'GET',
+        success: (result) => {
+            let i=0, j=0;
+            while(i < result.length && j < box.length) {
+                if(result[i]['recordGameLevel'] === j) {
+                    box[j].innerHTML = result[i]['recordCont'].slice(3)
+                    i++;
+                    j++;
+                } else if(result[i]['recordGameLevel'] > j) {
+                    box[j].innerHTML = '없음'
+                    j++;
+                } else if(result[i]['recordGameLevel'] < j) {
+                    i++;
+                }
+            }
+        },
+        error: (xhr, status) => {
+            alert(xhr +" : "+status)
         }
-    }
+    });
+
+    
 }
 
 function myRecord_setting_Single(idx, box, point) {
@@ -28,8 +39,7 @@ function myRecord_setting_Single(idx, box, point) {
 function rankRecord_setting(box, level) {
     boxclear(box)
     $.ajax({
-        url: `/game/minesweeper/record?level=${level}`,
-        dataType: 'json',
+        url: `/game/${gameName}/record?level=${level}`,
         type: 'GET',
         success: (result) => {
             if (result) {

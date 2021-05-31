@@ -34,8 +34,8 @@
   <%-include('../menu_side') %>
   <!-- //사이드 메뉴 바 구현 -->
   <script>
-    
-    let myRecord = JSON.parse(`<%= myRecord ? JSON.stringify(myRecord) : null%>`.replaceAll('&#34;', '\"'));
+    let userId = `<%= user ? user.userId : 'NONE'%>`
+        gameName = `<%= game%>`
   </script>
   <script src="/js/main.js"></script>
   <script src="/js/game/game.js"></script>
