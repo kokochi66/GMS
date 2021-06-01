@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 });
 
 router.get('/', (req,res) => {
-    res.status(200).render('./ejs/user/login.ejs', {'user':req.cookies.user})
+    res.status(200).render('./ejs/user/login.ejs', {'user':req.cookies.user, 'url':`${req.query.url}`})
 })
 
 router.post('/', (req,res) => {

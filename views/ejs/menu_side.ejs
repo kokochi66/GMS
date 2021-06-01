@@ -5,7 +5,7 @@
             <%= user ? true : false %> 
             <!-- 유저가 존재하면 유저의 정보를 표시, 아닐경우　일반표시  -->
         </div>
-        <a class="cont loguser" href="/<%= user ? 'logout' : 'login' %>" 
+        <a class="cont loguser" href="/<%= user ? `logout?url=${url}` : `login?url=${url}` %>" 
             onclick=<%= user ? `alert('로그아웃되었습니다.')` : "" %>><%= user? 'logout' : 'login' %></a>
         <a class="cont">menu2</a>
         <a class="cont">menu3</a>

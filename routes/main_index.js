@@ -13,7 +13,7 @@ router.use('/game', gameRouter)
 
 
 router.get('/', (req,res) => {
-    res.status(200).render('./ejs/main/index.ejs', {'user':req.cookies.user})
+    res.status(200).render('./ejs/main/index.ejs', {'user':req.cookies.user, 'url':`/`})
 })
 
 module.exports = router

@@ -1,0 +1,42 @@
+.game_box .game_play_box {
+    width: 680px; height: 680px; background-color: rgba(155, 192, 218, 0.842);
+    margin: 0px auto; box-sizing: border-box; border: 5px solid #000;
+    border-radius: 5px; display: flex; justify-content: space-around; flex-direction: column;
+}
+
+.game_box .game_play_box .top {width: 100%; height: 100px;}
+.game_box .game_play_box .top > div {height: 100%; float: left; position: relative;}
+.game_box .game_play_box .top .user1 {}
+.game_box .game_play_box .top .user2 {}
+.game_box .game_play_box .top .user {width: 50%;}
+.game_box .game_play_box .top .user .img {
+    width: 80px; height: 80px; background-color: rgb(65, 65, 65);
+    top: 50%; transform: translateY(-50%); position: absolute; border-radius: 10px;
+}
+.game_box .game_play_box .top .user1 .img {left: 5px;}
+.game_box .game_play_box .top .user2 .img {right: 5px;}
+.game_box .game_play_box .top .user .name {
+    text-shadow: 1px 1px 0 #fff; font-weight: bold; font-size: 20px; position: absolute;
+    bottom: 10px;
+}
+.game_box .game_play_box .top .user1 .name {left: 90px;}
+.game_box .game_play_box .top .user2 .name {right: 90px;}
+
+
+.game_box .game_play_box .play {width: 100%; height: 450px; background-color: rgb(151, 221, 144);}
+.game_box .game_play_box .play .box {width: 12.5%; height: 100%; box-sizing: border-box; border-left: 1px solid #000; float: left;}
+.game_box .game_play_box .play .box:first-child {border-left: none;}
+.game_box .game_play_box .play .box .board {height: 20%; background-color: rgb(119, 167, 185);}
+.game_box .game_play_box .play .box .pannel {height: 80%;}
+.game_box .game_play_box .play .box .pannel .ball {height: 25%; box-sizing: border-box; border-top: 1px solid #000; position: relative;}
+.game_box .game_play_box .play .box .pannel .ball .circle {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px;
+    background-color: rgb(73, 73, 73); border-radius: 50%;
+}
+
+
+.game_box .game_play_box .select {width: 100%; height: 130px;  background-color: rgb(210, 144, 221);}
+
+.game_box .game_info_box {
+    width: 680px; height: 120px; background-color: rgba(161, 161, 161, 0.842); margin: 0px auto;
+}

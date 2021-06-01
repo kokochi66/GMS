@@ -14,12 +14,7 @@ const connection = mysql.createConnection({
 });
 
 router.get('/:id', (req,res) => {
-    if(!req.cookies.user) {
-        res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user, 'myRecord' : {}})
-        return;
-    }   // 로그인되어있지 않으면 기록을 불러오지 않음
-
-    res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user})
+    res.status(200).render('./ejs/game/game.ejs', {'game':req.params.id, 'user':req.cookies.user, 'url':`/game/${req.params.id}`})
 })
 
 router.post('/:id/record', (req,res) => {
