@@ -27,6 +27,16 @@
 .game_box .game_play_box .play .box {width: 12.5%; height: 100%; box-sizing: border-box; border-left: 1px solid #000; float: left;}
 .game_box .game_play_box .play .box:first-child {border-left: none;}
 .game_box .game_play_box .play .box .board {height: 20%; background-color: rgb(119, 167, 185);}
+.game_box .game_play_box .play .box .board .ball {
+    width: 50%; float: left; box-sizing: border-box; border-left: 1px solid #000; height: 50%; position:relative;
+}
+.game_box .game_play_box .play .box .board .ball:nth-child(-n+2) {border-bottom: 1px solid #000;}
+.game_box .game_play_box .play .box .board .ball:nth-child(2n-1) {border-left: none;}
+.game_box .game_play_box .play .box .board .ball .circle {
+    width: 60%; height: 60%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgb(139, 139, 139);
+    border-radius: 50%;
+}
+
 .game_box .game_play_box .play .box .pannel {height: 80%;}
 .game_box .game_play_box .play .box .pannel .ball {height: 25%; box-sizing: border-box; border-top: 1px solid #000; position: relative;}
 .game_box .game_play_box .play .box .pannel .ball .circle {
