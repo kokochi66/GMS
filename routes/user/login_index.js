@@ -14,6 +14,7 @@ const connection = mysql.createConnection({
 });
 
 router.get('/', (req,res) => {
+    console.log(bcrypt.hashSync('0000', 10))
     res.status(200).render('./ejs/user/login.ejs', {'user':req.cookies.user, 'url':`${req.query.url}`})
 })
 
