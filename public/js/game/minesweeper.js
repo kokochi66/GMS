@@ -1,7 +1,5 @@
 let func = function() {
-    const game_box = document.querySelector('.game_box'),
-        game_play_box = document.querySelector('.game_box .game_play_box'),
-        game_info_box = document.querySelector('.game_box .game_info_box'),
+    const game_play_box = document.querySelector('.game_box .game_play_box'),
         game_diff_btn = document.querySelectorAll('.game_box .game_info_box .game_level > button'),
         game_mine_count = document.querySelector('.game_box .game_info_box .game_info .mine_count .cont'),
         game_play_time = document.querySelector('.game_box .game_info_box .game_info .play_time .cont'),
