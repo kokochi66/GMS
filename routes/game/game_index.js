@@ -3,6 +3,8 @@ const router = express.Router()
 const mysql = require('mysql')
 const fs = require('fs')
 const request = require('request')
+const http = require('http').createServer(router)
+const io = require('socket.io')(http)
 
 const connKey = JSON.parse(fs.readFileSync('./key/sql.json'))
 const connection = mysql.createConnection({
