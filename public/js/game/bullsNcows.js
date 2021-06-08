@@ -11,19 +11,27 @@ let func = function() {
         user1_box.className = 'user user1'
         user2_box.className = 'user user2'
         let img1_box = document.createElement('div')
+        let info1_box = document.createElement('div')
         let name1_box = document.createElement('div')
         let img2_box = document.createElement('div')
+        let info2_box = document.createElement('div')
         let name2_box = document.createElement('div')
         img1_box.classList.add('img')
+        info1_box.classList.add('info')
+        info1_box.innerHTML = '0승 0패'
         name1_box.classList.add('name')
         name1_box.innerHTML = 'kokochi'
         img2_box.classList.add('img')
+        info2_box.innerHTML = '0승 0패'
+        info2_box.classList.add('info')
         name2_box.classList.add('name')
         name2_box.innerHTML = 'crec'
         user1_box.append(img1_box)
+        user1_box.append(info1_box)
         user1_box.append(name1_box)
         top_box.append(user1_box)
         user2_box.append(img2_box)
+        user2_box.append(info2_box)
         user2_box.append(name2_box)
         top_box.append(user2_box)
         game_play_box.append(top_box)

@@ -9,6 +9,9 @@
 .game_box .game_play_box .top .user1 {}
 .game_box .game_play_box .top .user2 {}
 .game_box .game_play_box .top .user {width: 50%;}
+.game_box .game_play_box .top .user > div {
+
+}
 .game_box .game_play_box .top .user .img {
     width: 80px; height: 80px; background-color: rgb(65, 65, 65);
     top: 50%; transform: translateY(-50%); position: absolute; border-radius: 10px;
@@ -66,4 +69,49 @@
 
 .game_box .game_info_box {
     width: 680px; height: 120px; background-color: rgba(161, 161, 161, 0.842); margin: 0px auto;
+    border: 5px solid #000; box-sizing: border-box; border-top: none;
+}
+.game_box .game_info_box .game_channel {
+    width: 220px; height: 100%; float: left;
+    box-sizing: border-box; border-right: 5px solid #000;
+}
+.game_box .game_info_box .game_channel > div {
+    height: 50%; cursor: pointer; line-height: 60px; text-align: center;
+    font-size: 25px;
+}
+.game_box .game_info_box .game_channel .game_make_room {
+    border-bottom: 5px solid #000; 
+}
+.game_box .game_info_box .game_channel .game_part_room {
+    
+}
+
+.game_box .game_info_box .game_play_setting {
+    width: 450px; height: 100%; float: left;
+}
+.game_box .game_info_box .game_play_setting > div {
+    height: 50%;
+}
+.game_box .game_info_box .game_play_setting .game_setting_button {
+    border-bottom: 5px solid #000;
+}
+.game_box .game_info_box .game_play_setting > div > div {
+    width: 50%; height: 100%; float: left; box-sizing: border-box;
+    text-align: center; line-height: 60px; font-size: 25px; cursor: pointer;
+}
+.game_box .game_info_box .game_play_setting .game_setting_button .game_start {
+    border-right: 5px solid #000;
+}
+.game_box .game_info_box .game_play_setting .game_setting_button .game_info_start {
+
+}
+
+.game_box .game_info_box .game_play_setting .game_setting_check {
+   
+}
+.game_box .game_info_box .game_play_setting .game_setting_check .game_duplicated {
+    border-right: 5px solid #000;
+}
+.game_box .game_info_box .game_play_setting .game_setting_check .game_fasted {
+
 }
