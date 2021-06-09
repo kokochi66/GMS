@@ -10,17 +10,21 @@
 .game_box .game_play_box .top .user2 {}
 .game_box .game_play_box .top .user {width: 50%;}
 .game_box .game_play_box .top .user > div {
-
+    position: absolute;
 }
 .game_box .game_play_box .top .user .img {
     width: 80px; height: 80px; background-color: rgb(65, 65, 65);
-    top: 50%; transform: translateY(-50%); position: absolute; border-radius: 10px;
+    top: 50%; transform: translateY(-50%);  border-radius: 10px;
 }
 .game_box .game_play_box .top .user1 .img {left: 5px;}
 .game_box .game_play_box .top .user2 .img {right: 5px;}
+
+.game_box .game_play_box .top .user .info {bottom: 35px;}
+.game_box .game_play_box .top .user1 .info {left: 90px;}
+.game_box .game_play_box .top .user2 .info {right: 90px;}
+
 .game_box .game_play_box .top .user .name {
-    text-shadow: 1px 1px 0 #fff; font-weight: bold; font-size: 20px; position: absolute;
-    bottom: 10px;
+    text-shadow: 1px 1px 0 #fff; font-weight: bold; font-size: 20px;  bottom: 10px;
 }
 .game_box .game_play_box .top .user1 .name {left: 90px;}
 .game_box .game_play_box .top .user2 .name {right: 90px;}
