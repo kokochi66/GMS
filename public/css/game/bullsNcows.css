@@ -72,7 +72,7 @@
 .game_box .game_play_box .circle.white {background-color: rgb(255, 255, 255);}
 
 .game_box .game_info_box {
-    width: 680px; height: 120px; background-color: rgba(161, 161, 161, 0.842); margin: 0px auto;
+    width: 680px; height: 120px; background-color: rgba(216, 216, 216, 0.842); margin: 0px auto;
     border: 5px solid #000; box-sizing: border-box; border-top: none;
 }
 .game_box .game_info_box .game_channel {
@@ -81,7 +81,7 @@
 }
 .game_box .game_info_box .game_channel > div {
     height: 50%; cursor: pointer; line-height: 60px; text-align: center;
-    font-size: 25px;
+    font-size: 25px; box-sizing: border-box;
 }
 .game_box .game_info_box .game_channel .game_make_room {
     border-bottom: 5px solid #000; 
@@ -89,12 +89,19 @@
 .game_box .game_info_box .game_channel .game_part_room {
     
 }
+.game_box .game_info_box .game_channel .game_part_room .inputText {
+    height: 100%; width: 70%; display: block; float: left; box-sizing: border-box; font-size: 30px;
+}
+.game_box .game_info_box .game_channel .game_part_room .inputSubmit {
+    width: 30%; height: 100%; background-color: rgb(255, 255, 255); float: left;
+    box-sizing: border-box; border-left: 2px solid #000; 
+}
 
 .game_box .game_info_box .game_play_setting {
     width: 450px; height: 100%; float: left;
 }
 .game_box .game_info_box .game_play_setting > div {
-    height: 50%;
+    height: 50%; box-sizing: border-box;
 }
 .game_box .game_info_box .game_play_setting .game_setting_button {
     border-bottom: 5px solid #000;

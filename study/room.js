@@ -1,13 +1,14 @@
-const http = require('http')
+const express =require('express')
+const app = express()
+const server = require('http').createServer(app)
 const fs = require('fs')
 
-const server = http.createServer((req,res) => {
-    fs.readFile('room.html', (err,data) => {
-        res.writeHead(200, {'content-type':'text/html'})
-        res.end(data)
-    })
-}).listen(3000, () => {
-    console.log('start')
+app.get('/', (req,res) => {
+    res.sendFile(__dirname+"/room.html")
+})
+
+server.listen(3000, () => {
+    console.log('Socket IO server start')
 })
 
 const io = require('socket.io')(server);

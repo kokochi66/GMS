@@ -1,7 +1,38 @@
 let func = function() {
-    let game_play_box = document.querySelector('.game_box .game_play_box')
+    const participant_room = (e) => {
+        e.target.innerHTML = '';
+        
+        let inputText_box = document.createElement('input')
+        inputText_box.type = 'text';
+        inputText_box.className = 'inputText'
+        e.target.append(inputText_box)
+
+        let inputSubmit_box = document.createElement('div')
+        inputSubmit_box.className = 'inputSubmit'
+        inputSubmit_box.innerHTML = '입력'
+        game_channel_partroom_submit = inputSubmit_box
+        game_channel_partroom_submit.addEventListener('click', ev)
+        e.target.append(inputSubmit_box)
+        e.target.removeEventListener('click', participant_room)
+    }
+    const ev = (e) => {
+        
+    }
+
+
+    let game_play_box = document.querySelector('.game_box .game_play_box'),
+        game_channel_partroom = document.querySelector('.game_box .game_info_box .game_channel .game_part_room'),
+        game_channel_partroom_submit;
+
+    game_channel_partroom.addEventListener('click', participant_room)
+
+    
 
     let colorArr = ['red', 'blue', 'green', 'purple', 'white', 'yellow']
+    let socket = io.connect('http://localhost:3000/', { transport: ['websocket']})
+    socket.on('message', (msg) => {
+
+    })
     boxSetting()
     function boxSetting() {
         let top_box = document.createElement('div')
@@ -41,7 +72,6 @@ let func = function() {
         for(let i=0;i<8;i++) {
             let box_box = document.createElement('div')
             box_box.classList.add('box')
-            console.log(box_box)
 
             let board_box = document.createElement('div')
             board_box.classList.add('board')
@@ -82,6 +112,7 @@ let func = function() {
         }
         game_play_box.appendChild(select_box)
     }    
+    
 }
 
 
