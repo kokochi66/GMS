@@ -5,6 +5,7 @@ const fs = require('fs')
 const request = require('request')
 
 
+
 const connKey = JSON.parse(fs.readFileSync('./key/sql.json'))
 const connection = mysql.createConnection({
     host     : connKey.host,

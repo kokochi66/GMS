@@ -4,6 +4,7 @@ let func = function() {
         
         let inputText_box = document.createElement('input')
         inputText_box.type = 'text';
+        inputText_box.maxLength = 5;
         inputText_box.className = 'inputText'
         e.target.append(inputText_box)
 
@@ -11,13 +12,15 @@ let func = function() {
         inputSubmit_box.className = 'inputSubmit'
         inputSubmit_box.innerHTML = '입력'
         game_channel_partroom_submit = inputSubmit_box
-        game_channel_partroom_submit.addEventListener('click', ev)
+        game_channel_partroom_submit.addEventListener('click', roomChannelSubmit)
         e.target.append(inputSubmit_box)
         e.target.removeEventListener('click', participant_room)
-    }
-    const ev = (e) => {
-        
-    }
+    } // 방 참가하기 클릭 시 이벤트(입력 칸 열리기)
+    const roomChannelSubmit = (e) => {
+        let curr_input_box = document.querySelector('.game_box .game_info_box .game_channel .game_part_room .inputText')
+        let msg = { code:curr_input_box.value};
+        socket.emit('partRoom', msg)
+    } // 방 코드 입력 후 해당 코드값으로 채널 접속하기
 
 
     let game_play_box = document.querySelector('.game_box .game_play_box'),
@@ -29,10 +32,7 @@ let func = function() {
     
 
     let colorArr = ['red', 'blue', 'green', 'purple', 'white', 'yellow']
-    let socket = io.connect('http://localhost:3000/', { transport: ['websocket']})
-    socket.on('message', (msg) => {
 
-    })
     boxSetting()
     function boxSetting() {
         let top_box = document.createElement('div')

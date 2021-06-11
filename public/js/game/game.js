@@ -1,8 +1,15 @@
+let socket = io.connect()
+
+socket.on('joinRoom', (data) => {
+
+}) // 소켓을 통해서 방 참가신호를 보낼시에, 현재 방에 대한 데이터 정보를 보내도록 한다.
+
 function boxclear(box) {  
     while(box.hasChildNodes()) {
         box.removeChild(box.firstChild )
     }
 }
+
 function myRecord_setting(box) {
     $.ajax({
         url: `/game/${gameName}/myrecord?Userid=${userId}`,
@@ -34,7 +41,6 @@ function myRecord_setting_Single(idx, box, point) {
     console.log(point)
     box[idx].innerHTML = point.slice(3)
 }
-
 
 function rankRecord_setting(box, level) {
     boxclear(box)
@@ -68,8 +74,4 @@ function rankRecord_setting(box, level) {
             alert(xhr +" : "+status)
         }
     });
-}
-
-function rankRecord_setting_Single() {
-
 }
